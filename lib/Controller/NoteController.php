@@ -12,6 +12,8 @@ class NoteController extends Controller {
     /** @var NoteService */
     private $service;
 
+    private $folder;
+
     /** @var string */
     private $userId;
 
@@ -20,9 +22,11 @@ class NoteController extends Controller {
     public function __construct($appName,
                                 IRequest $request,
                                 NoteService $service,
+                                $folder,
                                 $userId) {
         parent::__construct($appName, $request);
         $this->service = $service;
+        $this->folder = $folder;
         $this->userId = $userId;
     }
 
@@ -46,6 +50,8 @@ class NoteController extends Controller {
      * @NoAdminRequired
      */
     public function create(string $title, string $content): DataResponse {
+        $this->folder->touch('hello_world.txt');
+
         return new DataResponse($this->service->create($title, $content,
             $this->userId));
     }
