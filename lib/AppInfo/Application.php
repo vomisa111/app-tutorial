@@ -18,7 +18,7 @@ class Application extends App {
             return $c->query('ServerContainer')->getUserFolder();
         });
 
-		$container->registerAlias('NoteController', NoteController::class);
+        $container->registerAlias('NoteController', NoteController::class);
     }
 }
 
